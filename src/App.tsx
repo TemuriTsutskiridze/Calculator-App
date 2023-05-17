@@ -2,9 +2,11 @@ import { useState } from "react";
 import { GlobalStyles } from "./components/Globals";
 import styled, { css } from "styled-components";
 
+import { evaluate } from "mathjs";
+
 function App() {
   const [theme, setTheme] = useState<number>(1);
-  const [output, setOutput] = useState<number | null>(null);
+  const [output, setOutput] = useState<string | null | undefined>(null);
 
   const buttons = [
     "7",
@@ -26,6 +28,66 @@ function App() {
     "RESET",
     "=",
   ];
+
+  function reset() {
+    setOutput(null);
+  }
+
+  function del() {
+    setOutput(output?.slice(0, -1));
+  }
+
+  function input(button: string) {
+    const updatedOutput = output?.replace(/x/g, "*");
+    setOutput((prevOutput) => {
+      if (
+        button === "+" ||
+        button === "-" ||
+        button === "x" ||
+        button === "/"
+      ) {
+        const lastChar = output ? output[output?.length - 1] : null;
+        if (
+          lastChar === "+" ||
+          lastChar === "-" ||
+          lastChar === "x" ||
+          lastChar === "/"
+        ) {
+          return prevOutput;
+        }
+      } else if (button === ".") {
+        const lastNum = updatedOutput?.split(/[+\-*/]/).pop();
+        if (lastNum?.includes(".")) {
+          return output;
+        }
+      }
+      if (
+        prevOutput === null ||
+        prevOutput === undefined ||
+        prevOutput === "Error"
+      ) {
+        return button;
+      } else return prevOutput + button;
+    });
+  }
+
+  function calculate() {
+    try {
+      let updatedOutput = output?.replace(/x/g, "*");
+
+      if (typeof updatedOutput === "string") {
+        const result = evaluate(updatedOutput);
+        if (isNaN(result)) {
+          throw new Error("Invalid expression");
+        }
+        updatedOutput = result.toFixed(2).toString();
+      }
+
+      setOutput(updatedOutput);
+    } catch (error) {
+      setOutput("Error");
+    }
+  }
 
   return (
     <>
@@ -59,13 +121,29 @@ function App() {
         <InputContainer>
           {buttons.map((button) => {
             if (button === "DEL") {
-              return <Delete key={button}>{button}</Delete>;
+              return (
+                <Delete key={button} onClick={del}>
+                  {button}
+                </Delete>
+              );
             } else if (button === "RESET") {
-              return <Reset key={button}>{button}</Reset>;
+              return (
+                <Reset key={button} onClick={reset}>
+                  {button}
+                </Reset>
+              );
             } else if (button === "=") {
-              return <Equals key={button}>{button}</Equals>;
+              return (
+                <Equals key={button} onClick={calculate}>
+                  {button}
+                </Equals>
+              );
             } else {
-              return <InputButton key={button}>{button}</InputButton>;
+              return (
+                <InputButton key={button} onClick={() => input(button)}>
+                  {button}
+                </InputButton>
+              );
             }
           })}
         </InputContainer>
