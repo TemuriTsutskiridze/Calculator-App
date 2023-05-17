@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { GlobalStyles } from "./components/Globals";
 import styled from "styled-components";
 
 import { evaluate } from "mathjs";
 
 function App() {
-  const [theme, setTheme] = useState<number>(1);
+  const [theme, setTheme] = useState<number>(() => {
+    const storedTheme = localStorage.getItem("THEME");
+    return storedTheme ? JSON.parse(storedTheme) : 1;
+  });
   const [output, setOutput] = useState<string | null | undefined>(null);
 
   const buttons = [
@@ -28,6 +31,10 @@ function App() {
     "RESET",
     "=",
   ];
+
+  useEffect(() => {
+    localStorage.setItem("THEME", JSON.stringify(theme));
+  }, [theme]);
 
   function reset() {
     setOutput(null);
