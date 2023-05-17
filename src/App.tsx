@@ -159,6 +159,22 @@ const Output = styled.div`
   padding: 2.9rem 2.4rem 2.2rem;
   border-radius: 10px;
 
+  &::-webkit-scrollbar {
+    width: 10px;
+    background: var(--slider-thumb);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--output-text);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: var(--slider-thumb-hover);
+    border-radius: 10px;
+  }
+
   @media (min-width: 90em) {
     font-size: 5.6rem;
     padding: 4rem 3.2rem 3.6rem;

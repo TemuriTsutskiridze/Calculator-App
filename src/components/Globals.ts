@@ -57,10 +57,10 @@ export const GlobalStyles = createGlobalStyle<Ttheme>`
           : "#1E0936"};
 
         --output-text: ${props.themeNumber === 1
-          ? "#D03F2F"
+          ? "#FFFFFF"
           : props.themeNumber === 2
-          ? "#C85402"
-          : "#00DED0"};
+          ? "#36362C"
+          : "#FFE53D"};
 
         --input-bg: ${props.themeNumber === 1
           ? "#242D44"
@@ -139,6 +139,22 @@ export const GlobalStyles = createGlobalStyle<Ttheme>`
         align-items: center;
         justify-content: center;
         padding: 3rem 0;
+
+        &::-webkit-scrollbar {
+            width: 10px;
+            background: var(--slider-thumb);
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: var(--output-text);
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background: var(--slider-thumb-hover);
+            border-radius: 10px;
+        }
 
         @media (min-width: 90em) {
             padding: 9.8rem 0 9.6rem;
