@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { GlobalStyles } from "./components/Globals";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { evaluate } from "mathjs";
 
