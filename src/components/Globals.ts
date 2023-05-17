@@ -139,6 +139,10 @@ export const GlobalStyles = createGlobalStyle<Ttheme>`
         align-items: center;
         justify-content: center;
         padding: 3rem 0;
+
+        @media (min-width: 90em) {
+            padding: 9.8rem 0 9.6rem;
+        }
     }
 
     #root {
@@ -146,6 +150,10 @@ export const GlobalStyles = createGlobalStyle<Ttheme>`
         flex-direction: column;
         gap: 3.2rem;
         width: 32.7rem;
+
+        @media (min-width: 90em) {
+            width: 54rem;
+        }
     }
 
   

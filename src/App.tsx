@@ -59,13 +59,13 @@ function App() {
         <InputContainer>
           {buttons.map((button) => {
             if (button === "DEL") {
-              return <Delete>{button}</Delete>;
+              return <Delete key={button}>{button}</Delete>;
             } else if (button === "RESET") {
-              return <Reset>{button}</Reset>;
+              return <Reset key={button}>{button}</Reset>;
             } else if (button === "=") {
-              return <Equals>{button}</Equals>;
+              return <Equals key={button}>{button}</Equals>;
             } else {
-              return <InputButton>{button}</InputButton>;
+              return <InputButton key={button}>{button}</InputButton>;
             }
           })}
         </InputContainer>
@@ -158,6 +158,11 @@ const Output = styled.div`
   overflow-x: auto;
   padding: 2.9rem 2.4rem 2.2rem;
   border-radius: 10px;
+
+  @media (min-width: 90em) {
+    font-size: 5.6rem;
+    padding: 4rem 3.2rem 3.6rem;
+  }
 `;
 
 const InputContainer = styled.div`
@@ -169,6 +174,13 @@ const InputContainer = styled.div`
   padding: 2.4rem;
   border-radius: 10px;
   color: var(--input-button-text);
+
+  @media (min-width: 90em) {
+    grid-template-columns: repeat(4, 10.1rem);
+    column-gap: 2.5rem;
+    row-gap: 2.4rem;
+    padding: 3.2rem 3rem;
+  }
 `;
 
 const InputButton = styled.button`
@@ -184,11 +196,17 @@ const InputButton = styled.button`
   &:hover {
     background: var(--input-button-bg-hover);
   }
+
+  @media (min-width: 90em) {
+    font-size: 4rem;
+    letter-spacing: -0.666667px;
+  }
 `;
 
 const Delete = styled.button`
   font-size: 2rem;
   line-height: 0.9em;
+  letter-spacing: -0.333333px;
   background: var(--delete-reset-button-bg);
   color: #ffffff;
   box-shadow: var(--delete-reset-button-box-shadow);
@@ -200,11 +218,16 @@ const Delete = styled.button`
   &:hover {
     background: var(--delete-reset-button-bg-hover);
   }
+
+  @media (min-width: 90em) {
+    font-size: 2.8rem;
+  }
 `;
 
 const Reset = styled.button`
   font-size: 2rem;
   line-height: 0.9em;
+  letter-spacing: -0.333333px;
   background: var(--delete-reset-button-bg);
   color: #ffffff;
   box-shadow: var(--delete-reset-button-box-shadow);
@@ -217,11 +240,16 @@ const Reset = styled.button`
   &:hover {
     background: var(--delete-reset-button-bg-hover);
   }
+
+  @media (min-width: 90em) {
+    font-size: 2.8rem;
+  }
 `;
 
 const Equals = styled.button`
   font-size: 2rem;
   line-height: 0.9em;
+  letter-spacing: -0.333333px;
   background: var(--equal-button-bg);
   color: var(--equal-button-text);
   box-shadow: var(--equal-button-box-shadow);
@@ -233,6 +261,10 @@ const Equals = styled.button`
 
   &:hover {
     background: var(--equal-button-bg-hover);
+  }
+
+  @media (min-width: 90em) {
+    font-size: 2.8rem;
   }
 `;
 
