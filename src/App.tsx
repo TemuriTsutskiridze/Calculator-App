@@ -64,7 +64,8 @@ function App() {
       if (
         prevOutput === null ||
         prevOutput === undefined ||
-        prevOutput === "Error"
+        prevOutput === "Error" ||
+        prevOutput === "Infinity"
       ) {
         return button;
       } else return prevOutput + button;
@@ -80,7 +81,7 @@ function App() {
         if (isNaN(result)) {
           throw new Error("Invalid expression");
         }
-        updatedOutput = result.toFixed(2).toString();
+        updatedOutput = result.toString();
       }
 
       setOutput(updatedOutput);
